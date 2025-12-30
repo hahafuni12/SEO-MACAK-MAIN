@@ -464,7 +464,7 @@ export default function PinnedHeroSection() {
     <FAQSection />
 
     {/* EXTENSION SECTION */}
-    <section style={{ minHeight: '50vh', padding: '100px 24px', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+    <section style={{ minHeight: '50vh', padding: '100px 24px', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', pointerEvents: 'auto' }}>
       {/* FADE OUT OVERLAY AT TOP */}
       <div style={{
         position: 'absolute',
@@ -477,98 +477,99 @@ export default function PinnedHeroSection() {
         zIndex: 1
       }} />
       
-      <div style={{ maxWidth: '1400px', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center', position: 'relative', zIndex: 10 }}>
+      <div style={{ maxWidth: '1400px', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', position: 'relative', zIndex: 10, pointerEvents: 'auto' }}>
         {/* LEFT SIDE - LARGE TEXT */}
-        <div>
-          <h2 style={{
-            fontSize: 'clamp(3rem, 12vw, 7rem)',
-            fontWeight: 900,
-            lineHeight: '1.1',
-            margin: '0',
-            color: '#fff'
-          }}>
-            Imate <span style={{ color: '#FDCA40' }}>stručnija</span> pitanja?
-          </h2>
-        </div>
+        <h2 style={{
+          fontSize: 'clamp(3rem, 12vw, 7rem)',
+          fontWeight: 900,
+          lineHeight: '1.1',
+          margin: '0',
+          color: '#fff'
+        }}>
+          Imate <span style={{ color: '#FDCA40' }}>stručnija</span> pitanja?
+        </h2>
 
-        {/* RIGHT SIDE - BUTTON */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Link to="/kontakt/" style={{ textDecoration: 'none' }}>
-            <button style={{
-              background: '#FDCA40',
-              color: '#000',
-              border: 'none',
-              padding: '40px 60px',
-              fontSize: '2rem',
-              borderRadius: '12px',
-              cursor: 'pointer',
-              fontWeight: '800',
-              transition: 'all 0.3s ease',
-              letterSpacing: '0.5px'
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-4px)';
-              e.target.style.boxShadow = '0 20px 50px rgba(253, 202, 64, 0.4)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0)';
-              e.target.style.boxShadow = 'none';
-            }}>
-              Kontakt
-            </button>
-          </Link>
-        </div>
+        {/* RIGHT SIDE - EMPTY */}
       </div>
     </section>
 
     {/* FOOTER */}
     <footer style={{ background: '#000', color: '#fff', padding: '60px 24px 30px', borderTop: '1px solid #333', position: 'relative', zIndex: 1000, pointerEvents: 'auto' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '40px', marginBottom: '60px' }}>
-          {/* FOOTER COLUMN 1 - BRAND */}
-          <div>
-            <h3 style={{ fontSize: '1.3rem', marginBottom: '20px' }}>SEO Mačak</h3>
-            <p style={{ color: '#aaa', lineHeight: '1.8' }}>
-              Stručna SEO optimizacija, web development i dizajn za vaš biznis.
-            </p>
+        <div style={{ display: 'flex', gap: '80px', marginBottom: '60px', position: 'relative', alignItems: 'flex-start' }}>
+          {/* LEFT SIDE - COLUMNS */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(150px, auto))', gap: '40px', flex: '0 0 auto' }}>
+            {/* FOOTER COLUMN 1 - BRAND */}
+            <div>
+              <h3 style={{ fontSize: '1.3rem', marginBottom: '20px' }}>SEO Mačak</h3>
+              <p style={{ color: '#aaa', lineHeight: '1.8', fontSize: '0.9rem' }}>
+                Stručna SEO optimizacija, web development i dizajn za vaš biznis.
+              </p>
+            </div>
+
+            {/* FOOTER COLUMN 2 - LINKS */}
+            <div>
+              <h4 style={{ fontSize: '1rem', marginBottom: '20px', color: '#fff' }}>Linkovi</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                <li style={{ marginBottom: '10px' }}><Link to="/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer', fontSize: '0.9rem' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Početna</Link></li>
+                <li style={{ marginBottom: '10px' }}><Link to="/izrada-sajtova/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer', fontSize: '0.9rem' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Izrada sajtova</Link></li>
+                <li style={{ marginBottom: '10px' }}><Link to="/seo/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer', fontSize: '0.9rem' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>SEO</Link></li>
+                <li style={{ marginBottom: '10px' }}><Link to="/blog/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer', fontSize: '0.9rem' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Blog</Link></li>
+              </ul>
+            </div>
+
+            {/* FOOTER COLUMN 3 - MORE LINKS */}
+            <div>
+              <h4 style={{ fontSize: '1rem', marginBottom: '20px', color: '#fff' }}>Kompanija</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                <li style={{ marginBottom: '10px' }}><Link to="/about/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer', fontSize: '0.9rem' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>O nama</Link></li>
+                <li style={{ marginBottom: '10px' }}><Link to="/kontakt/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer', fontSize: '0.9rem' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Kontakt</Link></li>
+                <li style={{ marginBottom: '10px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer', fontSize: '0.9rem' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Privatnost</a></li>
+                <li style={{ marginBottom: '10px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer', fontSize: '0.9rem' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Uslovi</a></li>
+              </ul>
+            </div>
+
+            {/* FOOTER COLUMN 4 - CONTACT */}
+            <div>
+              <h4 style={{ fontSize: '1rem', marginBottom: '20px', color: '#fff' }}>Kontakt</h4>
+              <p style={{ color: '#aaa', marginBottom: '10px', fontSize: '0.9rem' }}>email@example.com</p>
+              <p style={{ color: '#aaa', marginBottom: '10px', fontSize: '0.9rem' }}>+381 (0) 123 456 789</p>
+              <p style={{ color: '#aaa', fontSize: '0.9rem' }}>Beograd, Srbija</p>
+            </div>
           </div>
 
-          {/* FOOTER COLUMN 2 - LINKS */}
-          <div>
-            <h4 style={{ fontSize: '1rem', marginBottom: '20px', color: '#fff' }}>Linkovi</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '10px' }}><Link to="/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Početna</Link></li>
-              <li style={{ marginBottom: '10px' }}><Link to="/izrada-sajtova/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Izrada sajtova</Link></li>
-              <li style={{ marginBottom: '10px' }}><Link to="/seo/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>SEO</Link></li>
-              <li style={{ marginBottom: '10px' }}><Link to="/blog/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Blog</Link></li>
-            </ul>
-          </div>
-
-          {/* FOOTER COLUMN 3 - MORE LINKS */}
-          <div>
-            <h4 style={{ fontSize: '1rem', marginBottom: '20px', color: '#fff' }}>Kompanija</h4>
-            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              <li style={{ marginBottom: '10px' }}><Link to="/about/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>O nama</Link></li>
-              <li style={{ marginBottom: '10px' }}><Link to="/kontakt/" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Kontakt</Link></li>
-              <li style={{ marginBottom: '10px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Privatnost</a></li>
-              <li style={{ marginBottom: '10px' }}><a href="#" style={{ color: '#aaa', textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }} onMouseEnter={(e) => e.target.style.color = '#fff'} onMouseLeave={(e) => e.target.style.color = '#aaa'}>Uslovi</a></li>
-            </ul>
-          </div>
-
-          {/* FOOTER COLUMN 4 - CONTACT */}
-          <div>
-            <h4 style={{ fontSize: '1rem', marginBottom: '20px', color: '#fff' }}>Kontakt</h4>
-            <p style={{ color: '#aaa', marginBottom: '10px' }}>email@example.com</p>
-            <p style={{ color: '#aaa', marginBottom: '10px' }}>+381 (0) 123 456 789</p>
-            <p style={{ color: '#aaa' }}>Beograd, Srbija</p>
+          {/* RIGHT SIDE - BUTTON */}
+          <div style={{ marginLeft: 'auto', marginRight: '-210px', paddingRight: '24px', display: 'flex', alignItems: 'flex-start', marginTop: '40px' }}>
+            <Link to="/kontakt/" style={{ textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }}>
+              <div style={{
+                background: '#FDCA40',
+                color: '#000',
+                padding: '20px 50px',
+                fontSize: '1.3rem',
+                borderRadius: '6px',
+                fontWeight: '700',
+                transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                pointerEvents: 'auto',
+                display: 'inline-block',
+                whiteSpace: 'nowrap'
+              }} onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-8px) scale(1.08)';
+                e.target.style.boxShadow = '0 0 50px rgba(253, 202, 64, 0.8), 0 0 80px rgba(253, 202, 64, 0.4), 0 15px 40px rgba(0, 0, 0, 0.3)';
+              }} onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0) scale(1)';
+                e.target.style.boxShadow = 'none';
+              }}>
+                Kontakt
+              </div>
+            </Link>
           </div>
         </div>
 
-        {/* FOOTER BOTTOM */}
-        <div style={{ borderTop: '1px solid #333', paddingTop: '30px', textAlign: 'center', color: '#666' }}>
-          <p style={{ margin: 0 }}>© 2024 SEO Mačak. Sva prava zadržana.</p>
-        </div>
+      {/* FOOTER BOTTOM */}
+      <div style={{ borderTop: '1px solid #333', paddingTop: '30px', textAlign: 'center', color: '#666' }}>
+        <p style={{ margin: 0 }}>© 2024 SEO Mačak. Sva prava zadržana.</p>
       </div>
+    </div>
     </footer>
     </>
   )

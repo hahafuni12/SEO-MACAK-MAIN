@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useLayoutEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import FAQSection from './FAQSection'
 
 export default function PinnedHeroSection() {
   const containerRef = useRef(null)
@@ -206,7 +207,7 @@ export default function PinnedHeroSection() {
           />
           <div className="hero-inner container">
             <motion.div className="hero-center" style={{ opacity: heroOpacity }}>
-              <h1 className="hero-head">Vaše rešenje <strong className="em">SEO</strong> problema</h1>
+              <h1 className="hero-head">Prestani da se nadaš. Počni da se <strong className="em underline">rangiraš</strong>.</h1>
               <p className="subhead">Stručna SEO optimizacija, moderni web sajtovi i jasno dizajnirana komunikacija.</p>
               <motion.div 
                 className="scroll-arrow"
@@ -223,7 +224,7 @@ export default function PinnedHeroSection() {
       </div>
       
       {/* STICKY CONTAINER FOR SEQUENTIAL CARDS */}
-      <motion.div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', zIndex: 100, opacity: stickyContainerOpacity, pointerEvents: 'none' }}>
+      <motion.div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', zIndex: 50, opacity: stickyContainerOpacity, pointerEvents: 'none' }}>
         
         {/* ŠTA RADIMO TITLE - appears and animates to top-left */}
         <motion.h2 className="section-title" style={{ opacity: stataTitleOpacity, position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 'clamp(4rem, 15vw, 12rem)', margin: 0, zIndex: 200, whiteSpace: 'nowrap', x: stataTitleX, y: stataTitleY, scale: stataTitleScale }}>
@@ -459,11 +460,64 @@ export default function PinnedHeroSection() {
       </div>
     </section>
 
-    {/* TEST SECTION 2 */}
-    <section style={{ minHeight: '100vh', padding: '100px 24px', background: '#1a1a1a', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ maxWidth: '1200px', textAlign: 'center' }}>
-        <h2 style={{ fontSize: '3rem', margin: '0 0 20px 0' }}>Još jedna sekcija</h2>
-        <p style={{ fontSize: '1.1rem', lineHeight: '1.8', color: '#aaa' }}>Dodaj sadržaj koji trebaš ovde. Može biti FAQ, testimonijali, pricing, ili bilo šta drugo.</p>
+    {/* FAQ SECTION */}
+    <FAQSection />
+
+    {/* EXTENSION SECTION */}
+    <section style={{ minHeight: '50vh', padding: '100px 24px', background: 'transparent', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+      {/* FADE OUT OVERLAY AT TOP */}
+      <div style={{
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        right: '0',
+        height: '400px',
+        background: 'linear-gradient(180deg, #1a1a1a 0%, rgba(26, 26, 26, 0.7) 30%, rgba(26, 26, 26, 0.4) 60%, transparent 100%)',
+        pointerEvents: 'none',
+        zIndex: 1
+      }} />
+      
+      <div style={{ maxWidth: '1400px', width: '100%', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center', position: 'relative', zIndex: 10 }}>
+        {/* LEFT SIDE - LARGE TEXT */}
+        <div>
+          <h2 style={{
+            fontSize: 'clamp(3rem, 12vw, 7rem)',
+            fontWeight: 900,
+            lineHeight: '1.1',
+            margin: '0',
+            color: '#fff'
+          }}>
+            Imate <span style={{ color: '#FDCA40' }}>stručnija</span> pitanja?
+          </h2>
+        </div>
+
+        {/* RIGHT SIDE - BUTTON */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Link to="/kontakt/" style={{ textDecoration: 'none' }}>
+            <button style={{
+              background: '#FDCA40',
+              color: '#000',
+              border: 'none',
+              padding: '40px 60px',
+              fontSize: '2rem',
+              borderRadius: '12px',
+              cursor: 'pointer',
+              fontWeight: '800',
+              transition: 'all 0.3s ease',
+              letterSpacing: '0.5px'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'translateY(-4px)';
+              e.target.style.boxShadow = '0 20px 50px rgba(253, 202, 64, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}>
+              Kontakt
+            </button>
+          </Link>
+        </div>
       </div>
     </section>
 

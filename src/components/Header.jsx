@@ -1,19 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+import Link from './Link'
+import logoImg from '../../LOGO MAIN MAIN.png'
 
 export default function Header() {
+  const location = useLocation()
+  const isIzradaSajtova = location.pathname === '/izrada-sajtova/'
+  const logoColor = isIzradaSajtova ? '#ffffff' : '#000000'
+
   return (
     <header className="site-header">
       <div className="container">
         <Link to="/" className="logo">
-          <span className="logo-mark" aria-hidden="true">
-            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
-              <circle cx="20" cy="20" r="18" fill="#FDCA40" stroke="#000" strokeWidth="2" />
-            </svg>
-          </span>
-          <span className="logo-text" style={{ color: '#000000', textDecoration: 'underline', textDecorationColor: '#000000', textDecorationThickness: '2px' }}>
+          <img src={logoImg} alt="SEO Mačak" width="60" height="60" style={{ display: 'block', objectFit: 'contain' }} />
+          <span className="logo-text" style={{ color: logoColor, textDecoration: 'underline', textDecorationColor: logoColor, textDecorationThickness: '2px' }}>
             SEO<br/>
-            <span className="logo-sub" style={{ color: '#000000' }}>
+            <span className="logo-sub" style={{ color: logoColor }}>
               Mačak.
             </span>
           </span>

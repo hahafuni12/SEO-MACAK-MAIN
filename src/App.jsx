@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import PageTransition from './components/PageTransition'
 import PinnedHeroSection from './components/PinnedHeroSection'
 import About from './components/About'
 import IzradaSajtova from './components/IzradaSajtova'
@@ -10,14 +11,16 @@ import Kontakt from './components/Kontakt'
 export default function App(){
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<PinnedHeroSection />} />
-        <Route path="/about/" element={<About />} />
-        <Route path="/izrada-sajtova/" element={<IzradaSajtova />} />
-        <Route path="/seo/" element={<SEO />} />
-        <Route path="/blog/" element={<Blog />} />
-        <Route path="/kontakt/" element={<Kontakt />} />
-      </Routes>
+      <PageTransition>
+        <Routes>
+          <Route path="/" element={<PinnedHeroSection />} />
+          <Route path="/about/" element={<About />} />
+          <Route path="/izrada-sajtova/" element={<IzradaSajtova />} />
+          <Route path="/seo/" element={<SEO />} />
+          <Route path="/blog/" element={<Blog />} />
+          <Route path="/kontakt/" element={<Kontakt />} />
+        </Routes>
+      </PageTransition>
     </Router>
   )
 }

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useLayoutEffect, useState } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import FAQSection from './FAQSection'
+import logoImg from '../../LOGO MAIN MAIN.png'
 
 export default function PinnedHeroSection() {
   const containerRef = useRef(null)
@@ -159,11 +160,7 @@ export default function PinnedHeroSection() {
       <header className="site-header">
         <div className="container">
           <Link to="/" className="logo" onClick={handleLogoClick}>
-            <span className="logo-mark" aria-hidden="true">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
-                <circle cx="20" cy="20" r="18" fill="#FDCA40" stroke="#000" strokeWidth="2" />
-              </svg>
-            </span>
+            <img src={logoImg} alt="SEO Mačak" width="60" height="60" style={{ display: 'block', objectFit: 'contain' }} />
             <motion.span className="logo-text" style={{ color: logoColor, textDecoration: 'underline', textDecorationColor: logoColor, textDecorationThickness: '2px' }}>
               SEO<br/>
               <motion.span className="logo-sub" style={{ color: logoColor }}>
@@ -214,8 +211,8 @@ export default function PinnedHeroSection() {
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
               >
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M20 30 L28 20 L25 20 L25 10 L15 10 L15 20 L12 20 Z" fill="currentColor"/>
+                <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 5 L30 30 L50 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                 </svg>
               </motion.div>
             </motion.div>
@@ -539,7 +536,7 @@ export default function PinnedHeroSection() {
           </div>
 
           {/* RIGHT SIDE - BUTTON */}
-          <div style={{ marginLeft: 'auto', marginRight: '-210px', paddingRight: '24px', display: 'flex', alignItems: 'flex-start', marginTop: '40px' }}>
+          <div style={{ marginLeft: 'auto', marginRight: '-210npx', paddingRight: '24px', display: 'flex', alignItems: 'flex-start', marginTop: '40px' }}>
             <Link to="/kontakt/" style={{ textDecoration: 'none', pointerEvents: 'auto', cursor: 'pointer' }}>
               <div style={{
                 background: '#FDCA40',

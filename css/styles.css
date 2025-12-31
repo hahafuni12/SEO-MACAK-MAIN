@@ -8,6 +8,7 @@ body{font-family:Poppins,Inter,system-ui,Arial,sans-serif;line-height:1.5;color:
 .site-header .container{display:flex;align-items:center;justify-content:flex-end;padding:0 12px;padding-left:140px}
 .logo{font-size:calc(0.95rem + 6px);color:var(--accent);font-weight:700;letter-spacing:-0.01em;position:fixed;top:32px;left:32px;z-index:10060;margin:0;background:transparent;line-height:1;display:flex;align-items:center;gap:10px}
 .logo-mark svg{display:block;width:44px;height:44px}
+.logo-mark img{display:block;width:44px;height:44px}
 .logo-text{display:inline-block;line-height:1}
 .logo-sub{display:block;font-weight:600;font-size:calc(0.95rem + 6px);margin-top:2px}
 .logo::after{content:""}

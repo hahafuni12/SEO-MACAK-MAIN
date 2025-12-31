@@ -1,0 +1,57 @@
+<svg width="40" height="40" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Head -->
+  <circle cx="100" cy="110" r="70" fill="#000000"/>
+  
+  <!-- Yellow background behind head -->
+  <circle cx="100" cy="90" r="85" fill="#FDCA40"/>
+  
+  <!-- Left ear -->
+  <path d="M 60 40 Q 40 20 50 0 Q 70 25 65 60" fill="#000000"/>
+  
+  <!-- Right ear -->
+  <path d="M 140 40 Q 160 20 150 0 Q 130 25 135 60" fill="#000000"/>
+  
+  <!-- Left ear inner -->
+  <path d="M 60 40 Q 50 25 55 10 Q 65 30 62 50" fill="#C0C0C0"/>
+  
+  <!-- Right ear inner -->
+  <path d="M 140 40 Q 150 25 145 10 Q 135 30 138 50" fill="#C0C0C0"/>
+  
+  <!-- Left eye white -->
+  <ellipse cx="75" cy="95" rx="18" ry="22" fill="#FFFFFF"/>
+  
+  <!-- Right eye white -->
+  <ellipse cx="125" cy="95" rx="18" ry="22" fill="#FFFFFF"/>
+  
+  <!-- Left eye pupil -->
+  <path d="M 75 90 Q 70 85 75 80 Q 80 85 75 90" fill="#000000"/>
+  
+  <!-- Right eye pupil -->
+  <ellipse cx="122" cy="100" rx="6" ry="10" fill="#000000"/>
+  
+  <!-- Left eye iris color -->
+  <circle cx="75" cy="92" r="8" fill="#FDCA40"/>
+  
+  <!-- Right eye iris color -->
+  <circle cx="122" cy="100" r="6" fill="#FDCA40"/>
+  
+  <!-- Nose -->
+  <ellipse cx="100" cy="115" rx="5" ry="6" fill="#C0C0C0"/>
+  
+  <!-- Mouth -->
+  <path d="M 100 120 Q 85 135 70 130" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/>
+  <path d="M 100 120 Q 115 135 130 130" stroke="#FFFFFF" strokeWidth="4" fill="none" strokeLinecap="round"/>
+  
+  <!-- Smile lines -->
+  <line x1="80" y1="125" x2="80" y2="145" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round"/>
+  <line x1="90" y1="128" x2="90" y2="148" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round"/>
+  <line x1="110" y1="128" x2="110" y2="148" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round"/>
+  <line x1="120" y1="125" x2="120" y2="145" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round"/>
+  
+  <!-- Yellow accents on sides -->
+  <circle cx="45" cy="100" r="15" fill="#FDCA40"/>
+  <circle cx="155" cy="100" r="15" fill="#FDCA40"/>
+  
+  <!-- Tail bottom -->
+  <path d="M 35 130 Q 20 140 25 160" stroke="#FDCA40" strokeWidth="25" fill="none" strokeLinecap="round"/>
+</svg>

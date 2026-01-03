@@ -4,6 +4,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Link from './Link'
 import FAQSection from './FAQSection'
 import logoImg from '../../LOGO MAIN MAIN.png'
+import SeoOptimizationSvg from '../../SEO-Optimizacija.svg'
+import WebRazvijanjeShg from '../../Web-Razvijanje.svg'
+import WebDizajnSvg from '../../Web-Dizajn.svg'
 
 export default function PinnedHeroSection() {
   const containerRef = useRef(null)
@@ -60,23 +63,15 @@ export default function PinnedHeroSection() {
   const card3Y = useTransform(smoothProgress, [0.42, 0.44], [50, 0])
   
   // "Kako Radimo?" TITLE - appears centered at small scale, grows to 1, then moves to top-left and shrinks
-  const kakoTitleOpacity = useTransform(smoothProgress, [0.53, 0.58, 0.67], [0, 1, 1])
-  const kakoTitleScale = useTransform(smoothProgress, [0.53, 0.58, 0.67], [0.3, 1, 0.3])
-  const kakoTitleY = useTransform(smoothProgress, [0.58, 0.67], [0, -350])
-  const kakoTitleX = useTransform(smoothProgress, [0.58, 0.67], [0, -500])
+  const kakoTitleOpacity = useTransform(smoothProgress, [0.53, 0.57, 0.62, 0.62], [0, 1, 1, 1])
+  const kakoTitleScale = useTransform(smoothProgress, [0.53, 0.57, 0.62], [0.3, 1, 0.3])
+  const kakoTitleY = useTransform(smoothProgress, [0.57, 0.62], [0, -350])
+  const kakoTitleX = useTransform(smoothProgress, [0.57, 0.62], [0, -500])
   
-  // SEQUENTIAL CARDS - Kako Radimo (3 cards) - compressed timeline, Card 6 finishes early for viewing room
-  // Card 4: Discovery
-  const card4Opacity = useTransform(smoothProgress, [0.67, 0.69, 0.73, 0.76], [0, 1, 1, 0])
-  const card4Y = useTransform(smoothProgress, [0.67, 0.69], [50, 0])
-  
-  // Card 5: Strategy
-  const card5Opacity = useTransform(smoothProgress, [0.76, 0.78, 0.81, 0.84], [0, 1, 1, 0])
-  const card5Y = useTransform(smoothProgress, [0.76, 0.78], [50, 0])
-  
-  // Card 6: Results/Monitoring - only visible card
-  const card6Opacity = useTransform(smoothProgress, [0.84, 0.86, 0.90, 1.0], [0, 1, 1, 1])
-  const card6Y = useTransform(smoothProgress, [0.84, 0.86], [50, 0])
+  // SEQUENTIAL CARDS - Kako Radimo (4 cards) - starts after title animation finishes
+  // Card 4: Discovery, Strategy, Results, Monitoring
+  const card4Opacity = useTransform(smoothProgress, [0.62, 0.64, 1.0, 1.0], [0, 1, 1, 1])
+  const card4Y = useTransform(smoothProgress, [0.62, 0.64], [50, 0])
 
   useLayoutEffect(()=>{
     // ensure target has a non-static position for framer's offset calculations
@@ -91,10 +86,10 @@ export default function PinnedHeroSection() {
   const pinWrapRef = useRef(null)
   const [pinReleased, setPinReleased] = useState(false)
 
-  // toggle sticky -> relative when progress passes 0.38 so the page continues
+  // toggle sticky -> relative when progress passes 0.65 (after all animations finish) so the page continues
   useEffect(()=>{
     const unsub = smoothProgress.on('change', (p)=>{
-      const released = p >= 0.35
+      const released = p >= 0.65
       setPinReleased(released)
       if(pinWrapRef.current){
         pinWrapRef.current.style.position = released ? 'relative' : 'sticky'
@@ -161,7 +156,7 @@ export default function PinnedHeroSection() {
         to { background-position: 60px -60px; }
       }
     `}</style>
-    <div ref={containerRef} style={{ height: '1400vh', position: 'relative' }}>
+    <div ref={containerRef} style={{ height: '700vh', position: 'relative' }}>
       <motion.div style={{ position: 'fixed', inset: 0, zIndex: -1, backgroundColor: bgColor }} aria-hidden />
 
       <header className="site-header">
@@ -186,7 +181,135 @@ export default function PinnedHeroSection() {
         </div>
       </header>
 
-      <div className="pin-wrap" ref={pinWrapRef} style={{ position: pinReleased ? 'relative' : 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="pin-wrap" ref={pinWrapRef} style={{ position: pinReleased ? 'relative' : 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, isolation: 'isolate', overflow: 'hidden' }}>
+        
+        {/* Decorative Blobs */}
+        <motion.div 
+          style={{
+            position: 'fixed',
+            width: '500px',
+            height: '500px',
+            background: 'radial-gradient(circle, rgba(253, 202, 64, 0.25) 0%, transparent 70%)',
+            borderRadius: '50%',
+            top: '-150px',
+            right: '-150px',
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}
+          animate={{ x: [0, 100, 0], y: [0, -100, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div 
+          style={{
+            position: 'fixed',
+            width: '400px',
+            height: '400px',
+            background: 'radial-gradient(circle, rgba(253, 202, 64, 0.22) 0%, transparent 70%)',
+            borderRadius: '50%',
+            bottom: '-100px',
+            left: '-100px',
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}
+          animate={{ x: [0, -80, 0], y: [0, 80, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div 
+          style={{
+            position: 'fixed',
+            width: '350px',
+            height: '350px',
+            background: 'radial-gradient(circle, rgba(253, 202, 64, 0.2) 0%, transparent 70%)',
+            borderRadius: '50%',
+            top: '10%',
+            left: '2%',
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}
+          animate={{ y: [0, 70, 0], x: [0, 50, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div 
+          style={{
+            position: 'fixed',
+            width: '300px',
+            height: '300px',
+            background: 'radial-gradient(circle, rgba(253, 202, 64, 0.23) 0%, transparent 70%)',
+            borderRadius: '50%',
+            bottom: '5%',
+            right: '2%',
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}
+          animate={{ y: [0, -60, 0], x: [0, -50, 0] }}
+          transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
+        {/* Additional Decorative Blobs */}
+        <motion.div 
+          style={{
+            position: 'fixed',
+            width: '280px',
+            height: '280px',
+            background: 'radial-gradient(circle, rgba(253, 202, 64, 0.18) 0%, transparent 70%)',
+            borderRadius: '50%',
+            top: '5%',
+            right: '3%',
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}
+          animate={{ y: [0, -80, 0], x: [0, 65, 0] }}
+          transition={{ duration: 7.5, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div 
+          style={{
+            position: 'fixed',
+            width: '320px',
+            height: '320px',
+            background: 'radial-gradient(circle, rgba(253, 202, 64, 0.16) 0%, transparent 70%)',
+            borderRadius: '50%',
+            bottom: '30%',
+            left: '-80px',
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}
+          animate={{ y: [0, 75, 0], x: [0, -60, 0] }}
+          transition={{ duration: 8.5, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div 
+          style={{
+            position: 'fixed',
+            width: '220px',
+            height: '220px',
+            background: 'radial-gradient(circle, rgba(253, 202, 64, 0.21) 0%, transparent 70%)',
+            borderRadius: '50%',
+            top: '70%',
+            right: '8%',
+            zIndex: 2,
+            pointerEvents: 'none'
+          }}
+          animate={{ y: [0, 55, 0], x: [0, -65, 0] }}
+          transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
+        {/* Center Blob */}
+        <motion.div 
+          style={{
+            position: 'fixed',
+            width: '280px',
+            height: '280px',
+            background: 'radial-gradient(circle, rgba(253, 202, 64, 0.19) 0%, transparent 70%)',
+            borderRadius: '50%',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1,
+            pointerEvents: 'none'
+          }}
+          animate={{ y: [0, 40, 0], x: [0, -40, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        />
+
         <motion.div 
           style={{ 
             position: 'fixed',
@@ -246,12 +369,13 @@ export default function PinnedHeroSection() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '100px 24px'
+            padding: '100px 24px',
+            zIndex: 10
           }}
         >
           <div style={{ maxWidth: '1200px', width: '100%', display: 'flex', gap: '60px', alignItems: 'center' }}>
-            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-              <span>SEO Image</span>
+            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666', overflow: 'hidden' }}>
+              <img src={SeoOptimizationSvg} alt="SEO Optimizacija" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ flex: 1, color: '#fff' }}>
               <h3 style={{ fontSize: '2.5rem', marginTop: 0, marginBottom: '20px' }}>SEO Optimizacija</h3>
@@ -272,12 +396,13 @@ export default function PinnedHeroSection() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '100px 24px'
+            padding: '100px 24px',
+            zIndex: 10
           }}
         >
           <div style={{ maxWidth: '1200px', width: '100%', display: 'flex', gap: '60px', alignItems: 'center', flexDirection: 'row-reverse' }}>
-            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-              <span>Development Image</span>
+            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666', overflow: 'hidden' }}>
+              <img src={WebRazvijanjeShg} alt="Web Razvijanje" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ flex: 1, color: '#fff' }}>
               <h3 style={{ fontSize: '2.5rem', marginTop: 0, marginBottom: '20px' }}>Web Development</h3>
@@ -298,12 +423,13 @@ export default function PinnedHeroSection() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '100px 24px'
+            padding: '100px 24px',
+            zIndex: 10
           }}
         >
           <div style={{ maxWidth: '1200px', width: '100%', display: 'flex', gap: '60px', alignItems: 'center' }}>
-            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-              <span>Design Image</span>
+            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666', overflow: 'hidden' }}>
+              <img src={WebDizajnSvg} alt="Web Dizajn" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div style={{ flex: 1, color: '#fff' }}>
               <h3 style={{ fontSize: '2.5rem', marginTop: 0, marginBottom: '20px' }}>Dizajn</h3>
@@ -324,7 +450,7 @@ export default function PinnedHeroSection() {
           Kako Radimo?
         </motion.h2>
 
-        {/* CARD 4: Discovery - Left Image, Right Text */}
+        {/* CARD 4: Discovery & Analysis - Grid Layout with 4 cards */}
         <motion.div
           style={{
             position: 'absolute',
@@ -334,71 +460,80 @@ export default function PinnedHeroSection() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '100px 24px'
+            padding: '100px 24px',
+            zIndex: 10
           }}
         >
-          <div style={{ maxWidth: '1200px', width: '100%', display: 'flex', gap: '60px', alignItems: 'center' }}>
-            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-              <span>Discovery Image</span>
-            </div>
-            <div style={{ flex: 1, color: '#fff' }}>
-              <h3 style={{ fontSize: '2.5rem', marginTop: 0, marginBottom: '20px' }}>Otkrivanje & Analiza</h3>
-              <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                Počinjemo detaljnom analizom vašeg poslovanja, industrije, konkurencije i ciljne audience. Razumevamo vaše ciljeve i izazove kako bismo kreirali strategiju koja je potpuno prilagođena vašim potrebama.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CARD 5: Strategy - Right Image, Left Text */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            opacity: card5Opacity,
-            y: card5Y,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '100px 24px'
-          }}
-        >
-          <div style={{ maxWidth: '1200px', width: '100%', display: 'flex', gap: '60px', alignItems: 'center', flexDirection: 'row-reverse' }}>
-            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-              <span>Strategy Image</span>
-            </div>
-            <div style={{ flex: 1, color: '#fff' }}>
-              <h3 style={{ fontSize: '2.5rem', marginTop: 0, marginBottom: '20px' }}>Strategija</h3>
-              <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                Razvijamo jasnu, merljivu strategiju koja kreira putanju od trenutnog stanja do željenih rezultata. Definišemo KPI-je, vremensku liniju i plan akcije sa tačno definisanim etapama.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* CARD 6: Results & Monitoring - Right Image, Left Text */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            opacity: card6Opacity,
-            y: card6Y,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '100px 24px'
-          }}
-        >
-          <div style={{ maxWidth: '1200px', width: '100%', display: 'flex', gap: '60px', alignItems: 'center', flexDirection: 'row-reverse' }}>
-            <div style={{ flex: 1, minHeight: '400px', background: '#1a1a1a', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
-              <span>Results Image</span>
-            </div>
-            <div style={{ flex: 1, color: '#fff' }}>
-              <h3 style={{ fontSize: '2.5rem', marginTop: 0, marginBottom: '20px' }}>Rezultati & Monitoring</h3>
-              <p style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-                Pratimo sve metrike i KPI-je kako bismo osigurali da projekat dostiže željene rezultate. Redovni izveštaji i analize omogućavaju nam da kontinuirano optimizujemo strategiju i donosimo podatkom vođene odluke.
-              </p>
-            </div>
+          <div style={{ maxWidth: '1400px', width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px' }}>
+            {[
+              {
+                number: '01',
+                title: 'Otkrivanje i analiza',
+                subtitle: 'Istraživanje potencijala',
+                quote: 'Gledamo tamo gde drugi ne vide.',
+                desc: 'Detaljno skeniramo tvoju nišu, konkurenciju i tehničko stanje sajta kako bismo pronašli "rupe" koje te koštaju pozicija i novca.'
+              },
+              {
+                number: '02',
+                title: 'Strategija',
+                subtitle: 'Arhitektura rešenja',
+                quote: 'Precizan plan za dominaciju.',
+                desc: 'Kreiramo personalizovanu SEO i željenu marketing strategiju. Bez nagađanja – svaki korak je dizajniran da poveća tvoj autoritet i vidljivost.'
+              },
+              {
+                number: '03',
+                title: 'Rezultati',
+                subtitle: 'Merenje uspeha',
+                quote: 'Podaci koji se pretvaraju u profit.',
+                desc: 'Ne brojimo samo posete, već konverzije. Po dogovoru, možeš da pratiš svaki dinar kroz jasne izveštaje o rastu prodaje, upita i relevantnog saobraćaja.'
+              },
+              {
+                number: '04',
+                title: 'Monitoring',
+                subtitle: 'Kontinuirana optimizacija',
+                quote: 'Ostanak na vrhu je teži od uspona.',
+                desc: 'Google se menja, mi se menjamo brže. Stalno podešavamo kampanje i sajt kako bi tvoj biznis ostao lider bez obzira na promene algoritma.'
+              }
+            ].map((card, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                style={{
+                  background: 'linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%)',
+                  border: '1px solid #333',
+                  borderRadius: '12px',
+                  padding: '60px 30px',
+                  color: '#fff',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  minHeight: '520px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'flex-start'
+                }}
+              >
+                <div style={{ position: 'relative', zIndex: 2 }}>
+                  <div style={{ fontSize: '6rem', fontWeight: '900', color: '#FDCA40', marginBottom: '30px', opacity: 0.8 }}>
+                    {card.number}
+                  </div>
+                  <h4 style={{ fontSize: '1.3rem', fontWeight: '700', marginBottom: '8px', marginTop: 0 }}>
+                    {card.title}
+                  </h4>
+                  <p style={{ fontSize: '0.95rem', color: '#FDCA40', fontWeight: '600', marginBottom: '15px' }}>
+                    {card.subtitle}
+                  </p>
+                  <p style={{ fontSize: '0.9rem', color: '#fff', fontStyle: 'italic', marginBottom: '15px', fontWeight: '500' }}>
+                    "{card.quote}"
+                  </p>
+                  <p style={{ fontSize: '0.9rem', color: '#b0b0b0', lineHeight: '1.6', marginBottom: 0 }}>
+                    {card.desc}
+                  </p>
+                </div>
+                <div style={{ position: 'absolute', top: 0, right: 0, width: '100px', height: '100px', background: 'radial-gradient(circle, rgba(253, 202, 64, 0.1) 0%, transparent 70%)', borderRadius: '50%', zIndex: 1 }} />
+              </motion.div>
+            ))}
           </div>
         </motion.div>
         

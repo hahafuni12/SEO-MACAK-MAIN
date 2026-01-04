@@ -12,6 +12,29 @@ const keyframes = `
 
 export default function IzradaSajtova() {
   const portfolioContainerRef = useRef(null)
+  const [windowWidth, setWindowWidth] = React.useState(typeof window !== 'undefined' ? window.innerWidth : 1200)
+
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  // Responsive carousel values
+  const getCarouselValues = () => {
+    if (windowWidth < 768) {
+      return { paddingLeft: 20, paddingRight: 600, gap: 100, translateX: -2600 }
+    } else if (windowWidth < 1024) {
+      return { paddingLeft: 60, paddingRight: 700, gap: 150, translateX: -3200 }
+    } else if (windowWidth < 1920) {
+      return { paddingLeft: 180, paddingRight: 900, gap: 200, translateX: -3600 }
+    } else {
+      return { paddingLeft: 200, paddingRight: 1100, gap: 220, translateX: -4200 }
+    }
+  }
+
+  const carouselValues = getCarouselValues()
+  
   const { scrollYProgress } = useScroll({
     target: portfolioContainerRef,
     offset: ['start start', 'end start'],
@@ -22,7 +45,7 @@ export default function IzradaSajtova() {
   // Carousel horizontal scroll animation - all cards move together in a row
   // Entire carousel track translates left as user scrolls
   // Progress: 0 = start (cards visible from left), 1 = end (cards off-screen to left)
-  const carouselX = useTransform(smoothProgress, [0.10, 0.90], [0, -2200])
+  const carouselX = useTransform(smoothProgress, [0, 0.75], [0, carouselValues.translateX])
 
   const projects = [
     {
@@ -52,13 +75,6 @@ export default function IzradaSajtova() {
       result: '+200% engagement',
       tech: 'Design, Web',
       color: '#00FF88'
-    },
-    {
-      title: 'Mobile App Landing Page',
-      desc: 'Visoko konvertujući landing page za mobilnu aplikaciju sa optimizovanim call-to-action.',
-      result: '+35% conversion',
-      tech: 'Next.js, Vercel',
-      color: '#FF9500'
     }
   ]
   return (
@@ -363,16 +379,17 @@ export default function IzradaSajtova() {
       </section>
 
       {/* CAROUSEL PORTFOLIO SECTION - Horizontal Scrolling Track */}
-      <div ref={portfolioContainerRef} style={{ position: 'relative', height: '600vh' }}>
+      <div ref={portfolioContainerRef} style={{ position: 'relative', height: '350vh' }}>
         <div style={{ 
           position: 'sticky', 
           top: 0, 
           height: '100vh', 
+          width: '100%',
           background: '#000', 
           color: '#fff',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           overflow: 'hidden',
           zIndex: 100
         }}>
@@ -396,10 +413,11 @@ export default function IzradaSajtova() {
             style={{
               x: carouselX,
               display: 'flex',
-              gap: '80px',
-              paddingLeft: '24px',
-              paddingRight: '24px',
+              gap: `${carouselValues.gap}px`,
+              paddingLeft: `${carouselValues.paddingLeft}px`,
+              paddingRight: `${carouselValues.paddingRight}px`,
               paddingTop: '120px',
+              paddingBottom: '60px',
               minWidth: 'fit-content',
               height: 'auto'
             }}
@@ -414,7 +432,7 @@ export default function IzradaSajtova() {
                 width: 'min(1200px, 90vw)'
               }}>
                 {/* Card Content - Text */}
-                <div style={{ flex: '1 1 420px', paddingTop: '40px', minWidth: '280px' }}>
+                <div style={{ flex: '1 1 420px', paddingTop: '40px', minWidth: '280px', maxWidth: '500px' }}>
                   <h3 style={{ fontSize: '2.5rem', fontWeight: '700', color: '#FFFFFF', marginBottom: '20px', lineHeight: '1.3' }}>
                     {project.title}
                   </h3>
@@ -491,25 +509,99 @@ export default function IzradaSajtova() {
         </div>
       </div>
 
-      {/* PROCESS - How We Work */}
-      <section style={{ padding: '80px 24px', background: '#000', color: '#fff' }}>
-        <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '50px', color: '#FDCA40' }}>Naš Proces</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
-            {[
-              { step: '01', title: 'Konsultacija', desc: 'Razumijevanje vašeg poslovanja i ciljeva' },
-              { step: '02', title: 'Planiranje', desc: 'Straterija, sitemap i dizajn koncepta' },
-              { step: '03', title: 'Razvoj', desc: 'Kodiranje i implementacija funkcionalnosti' },
-              { step: '04', title: 'Testiranje', desc: 'QA, sigurnost i optimizacija performansi' },
-              { step: '05', title: 'Lansiranje', desc: 'Pokretanje i praćenje' },
-              { step: '06', title: 'Podrška', desc: 'Održavanje i kontinuirana poboljšanja' }
-            ].map((item, idx) => (
-              <div key={idx} style={{ padding: '25px', textAlign: 'center', background: '#1a1a1a', borderRadius: '8px' }}>
-                <div style={{ fontSize: '2.5rem', color: '#FDCA40', fontWeight: '700', marginBottom: '10px' }}>{item.step}</div>
-                <h4 style={{ fontSize: '1.2rem', marginBottom: '8px' }}>{item.title}</h4>
-                <p style={{ color: '#999', fontSize: '0.9rem' }}>{item.desc}</p>
-              </div>
-            ))}
+      {/* PROCESS - How We Work - New Design */}
+      <section style={{ padding: '120px 24px', background: '#000', color: '#fff', position: 'relative', overflow: 'hidden' }}>
+        {/* Animated moving background - diagonal pattern */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: 'linear-gradient(45deg, transparent 48%, #FDCA40 49%, #FDCA40 51%, transparent 52%), linear-gradient(-45deg, transparent 48%, #FDCA40 49%, #FDCA40 51%, transparent 52%)',
+            backgroundSize: '60px 60px',
+            backgroundPosition: '0px 0px',
+            opacity: 0.04,
+            animation: 'moveDiagonalDots 3s linear infinite',
+            zIndex: 0,
+            pointerEvents: 'none'
+          }}
+        />
+        <div style={{ maxWidth: '1300px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+          {/* First Block - Strategija i Otkrivanje (01+02) */}
+          <div style={{ marginBottom: '120px', position: 'relative' }}>
+            <div style={{
+              position: 'absolute',
+              top: '-40px',
+              left: '0',
+              fontSize: '180px',
+              fontWeight: '900',
+              color: '#FDCA40',
+              opacity: '0.08',
+              zIndex: 0,
+              pointerEvents: 'none'
+            }}>01</div>
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <h3 style={{ fontSize: '3.5rem', fontWeight: '800', color: '#FFFFFF', marginBottom: '30px', lineHeight: '1.2' }}>
+                Strategija i Otkrivanje
+              </h3>
+              <p style={{ fontSize: '1.3rem', color: '#FDCA40', fontWeight: '700', marginBottom: '25px', maxWidth: '800px' }}>
+                Vaš biznis zaslužuje plan, a ne samo šablon
+              </p>
+              <p style={{ fontSize: '1.1rem', color: '#A0A0A0', lineHeight: '1.8', maxWidth: '850px', marginBottom: '20px' }}>
+                Svaki uspešan projekat u SEO Mačku počinje dubokim razumevanjem vaših ciljeva. Ne krećemo u rad dok ne definišemo ko je vaš idealni kupac i kako ćemo ga dovesti do vas. Naše planiranje obuhvata arhitekturu sajta koja je logična i korisnicima i Google algoritmima.
+              </p>
+            </div>
+          </div>
+
+          {/* Second Block - Inženjering i Preciznost (03+04) */}
+          <div style={{ marginBottom: '120px', position: 'relative' }}>
+            <div style={{
+              position: 'absolute',
+              top: '-40px',
+              right: '0',
+              fontSize: '180px',
+              fontWeight: '900',
+              color: '#FDCA40',
+              opacity: '0.08',
+              zIndex: 0,
+              pointerEvents: 'none'
+            }}>02</div>
+            <div style={{ position: 'relative', zIndex: 1, textAlign: 'right' }}>
+              <h3 style={{ fontSize: '3.5rem', fontWeight: '800', color: '#FFFFFF', marginBottom: '30px', lineHeight: '1.2' }}>
+                Inženjering i Preciznost
+              </h3>
+              <p style={{ fontSize: '1.3rem', color: '#FDCA40', fontWeight: '700', marginBottom: '25px' }}>
+                Kod koji pretraživači obožavaju
+              </p>
+              <p style={{ fontSize: '1.1rem', color: '#A0A0A0', lineHeight: '1.8', maxWidth: '100%' }}>
+                Razvoj nije samo pisanje koda; to je optimizacija svake linije za brzinu i sigurnost. Dok drugi samo "prave sajt", mi implementiramo funkcionalnosti koje smanjuju bounce rate. Svaki element prolazi kroz rigorozno testiranje pre nego što ugleda svetlost dana, osiguravajući da vaš sajt bude brz na svakom uređaju.
+              </p>
+            </div>
+          </div>
+
+          {/* Third Block - Lansiranje i Kontinuirani Rast (05+06) */}
+          <div style={{ textAlign: 'center', position: 'relative' }}>
+            <div style={{
+              position: 'absolute',
+              top: '-40px',
+              right: '0',
+              fontSize: '180px',
+              fontWeight: '900',
+              color: '#FDCA40',
+              opacity: '0.08',
+              zIndex: 0,
+              pointerEvents: 'none'
+            }}>03</div>
+            <div style={{ position: 'relative', zIndex: 1 }}>
+              <h3 style={{ fontSize: '3.5rem', fontWeight: '800', color: '#FFFFFF', marginBottom: '30px', lineHeight: '1.2' }}>
+                Lansiranje i Kontinuirani Rast
+              </h3>
+              <p style={{ fontSize: '1.3rem', color: '#FDCA40', fontWeight: '700', marginBottom: '25px' }}>
+                Mi ne odlazimo nakon klika na <span style={{ fontWeight: '900' }}>"Publish"</span>
+              </p>
+              <p style={{ fontSize: '1.1rem', color: '#A0A0A0', lineHeight: '1.8', maxWidth: '900px', margin: '0 auto' }}>
+                Lansiranje sajta je tek početak vašeg digitalnog puta. Pratimo rezultate, analiziramo ponašanje korisnika i vršimo fina podešavanja kako bismo osigurali da sajt donosi rezultate koje ste želeli. Uz našu podršku, vaš sajt ostaje siguran, moderan i uvek korak ispred konkurencije.
+              </p>
+            </div>
           </div>
         </div>
       </section>
